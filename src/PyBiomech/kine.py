@@ -85,7 +85,7 @@ def changeMarkersReferenceFrame(mkrs, Rfull):
 
     # Calculate marker coordinates in local reference frame
     mkrsNew = {}
-    mkrList = mkrs.keys()
+    mkrList = list(mkrs.keys())
     for m in mkrList:
         M = mkrs[m][:]  # copy
         if len(M.shape) == 1:
@@ -144,7 +144,7 @@ def rigidBodySVDFun(mkrs, mkrList, args):
     Nf = mkrs[mkrList[0]].shape[0]
     R = np.zeros((Nf, 3, 3))
     T = np.zeros((Nf, 3))
-    for i in xrange(0,Nf):
+    for i in range(0,Nf):
 
         # Create Nmarkers x 3 matrix for global coordinates
         y = np.array([mkrs[m][i,:].tolist() for m in mkrList])
@@ -165,7 +165,7 @@ def rigidBodySVDFun(mkrs, mkrList, args):
             Ri = np.empty((3,3)) * np.nan
             Ti = np.empty((3,)) * np.nan
             ei = np.empty((y.shape[0],)) * np.nan
-            print('Only %d markers are visible for frame %d. Data will be set to nan' % (Nv, i))
+            print(('Only %d markers are visible for frame %d. Data will be set to nan' % (Nv, i)))
 
         # Calculate RSME
         RMSE = np.sqrt(np.sum(ei))
@@ -173,7 +173,7 @@ def rigidBodySVDFun(mkrs, mkrList, args):
         eMax = np.max(ei)
 
         if verbose:
-            print('RMSE for rigid pose estimation for frame %d: %.5f mm. Max distance for %s: %.5f mm' % (i, RMSE, mkrList[iMax], eMax))
+            print(('RMSE for rigid pose estimation for frame %d: %.5f mm. Max distance for %s: %.5f mm' % (i, RMSE, mkrList[iMax], eMax)))
 
         # Insert into roto-translation matrix
         R[i,:,:] = Ri
@@ -386,7 +386,7 @@ def interpSignals(x, xNew, D, kSpline=1):
     """
 
     R = np.zeros((xNew.shape[0],D.shape[1])) * np.nan
-    for i in xrange(0, D.shape[1]):
+    for i in range(0, D.shape[1]):
         idx = ~np.isnan(D[:,i])
         fIdx = InterpolatedUnivariateSpline(x, idx, k=1)
         f = InterpolatedUnivariateSpline(x[idx], D[idx,i], k=kSpline)
@@ -428,8 +428,8 @@ def resampleMarker(M, x=None, origFreq=None, origX=None, step=None):
         Indices of ``x`` intersecting time vector of the original ``M``.
 
     """
-    if x <> None and (origFreq <> None or origX <> None):
-        if origFreq <> None:
+    if x != None and (origFreq != None or origX != None):
+        if origFreq != None:
             N = M.shape[0]
             dt = 1. / origFreq
             x1 = np.linspace(0, (N-1)*dt, num=N)
@@ -439,7 +439,7 @@ def resampleMarker(M, x=None, origFreq=None, origX=None, step=None):
 #        f = interp1d(x1, M, axis=0)
 #        M2 = f(x2)
         M2 = interpSignals(x1, x2, M)
-    elif step <> None:
+    elif step != None:
         N = M.shape[0]
         x1 = np.linspace(0, N-1, num=N)
         x2 = np.arange(0, N-1, step)
@@ -636,7 +636,7 @@ def collinearNPointsStylusFun(P, args):
 
     # Difference between extreme markers
     existingMarkerIdxs = []
-    for i in xrange(0, len(markers)):
+    for i in range(0, len(markers)):
         if markers[i] in P:
             existingMarkerIdxs.append(i)
 
@@ -655,7 +655,7 @@ def collinearNPointsStylusFun(P, args):
     X = np.zeros((Nf,0))
     Y = np.zeros((Nf,0))
     Z = np.zeros((Nf,0))
-    for i in xrange(0, len(markers)):
+    for i in range(0, len(markers)):
         if i not in existingMarkerIdxs:
             continue
         tip = P[markers[i]] + dist[i] * N
@@ -782,7 +782,7 @@ def nonCollinear5PointsStylusFun(P, args, verbose=True):
     u1 = np.zeros((Nf,3))
     u2 = np.zeros((Nf,3))
     v = np.zeros((Nf,3))
-    for i in xrange(Nf):
+    for i in range(Nf):
         
         # Perform trilateration with markers P1-P3-P5
         _u1, _v1 = trilateration(np.array([P1[i,:], P3[i,:], P5[i,:]]), np.array([r1, r3, r5]))

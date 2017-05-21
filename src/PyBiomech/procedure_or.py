@@ -5,7 +5,7 @@
 """
 
 import numpy as np
-import fio, kine, kine_or, vtkh
+from . import fio, kine, kine_or, vtkh
 import re
 from itertools import groupby
 
@@ -118,7 +118,7 @@ def expressOptoWandTipToMimicsRefFrame(
         fio.writeC3D(filePathNewC3D, data, copyFromFile=filePathC3D)
     
     # Calculate pose from Mimics reference frame to Optoelectronic reference frame
-    print('==== Calculating {0} pose from Mimics reference frame to Optoelectronic reference frame ...'.format(refSegment))
+    print(('==== Calculating {0} pose from Mimics reference frame to Optoelectronic reference frame ...'.format(refSegment)))
     if refSegment == 'femur':
         mkrList = ['mF1', 'mF2', 'mF3', 'mF4']
     elif refSegment == 'tibia':

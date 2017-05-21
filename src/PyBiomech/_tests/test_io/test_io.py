@@ -14,4 +14,4 @@ sys.path.append(modPath)
 from PyBiomech import io
 
 data = io.readMimics('landmarks.mimics.txt', [])
-print data
+print(data)

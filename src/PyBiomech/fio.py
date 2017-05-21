@@ -69,7 +69,7 @@ def readC3D(fileName, sections, opts={}):
         # Get relevant marker data (N x 3)
         markers = {}
         coll = acq.GetPoints()
-        for i in xrange(coll.GetItemNumber()):
+        for i in range(coll.GetItemNumber()):
             point = coll.GetItem(i)
             label = point.GetLabel()
             if 'removeSegmentNameFromMarkerNames' in opts and opts['removeSegmentNameFromMarkerNames']:

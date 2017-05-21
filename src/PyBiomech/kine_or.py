@@ -6,7 +6,7 @@
 
 
 import numpy as np
-from kine import getVersor, nonCollinear5PointsStylusFun
+from .kine import getVersor, nonCollinear5PointsStylusFun
 
 
 def gensegOR(mkrs):

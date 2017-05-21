@@ -44,7 +44,7 @@ tip, tipReduced = proc.expressOptoWandTipToMimicsRefFrame(
                                         forceNoPauses = forceNoPauses
                                         )
 
-print tip
+print(tip)
  
 # Write tip coordinates to file
 with open('tip.txt', 'wb') as f:

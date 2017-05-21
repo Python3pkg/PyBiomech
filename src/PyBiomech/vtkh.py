@@ -5,7 +5,7 @@
 """
 
 import vtk
-import fio
+from . import fio
 
 
 def reposeVTKData(vktDataIn, pose):
